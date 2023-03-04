@@ -16,6 +16,6 @@
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "comma-dangle": "off",
-    "@typescript-eslint/comma-dangle": "warn"
+    "@typescript-eslint/comma-dangle": "off"
   }
 }
