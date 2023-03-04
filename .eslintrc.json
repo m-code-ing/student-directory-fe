@@ -12,5 +12,10 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": { "@typescript-eslint/dot-notation": "error" }
+  "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "comma-dangle": "off",
+    "@typescript-eslint/comma-dangle": "warn"
+  }
 }
