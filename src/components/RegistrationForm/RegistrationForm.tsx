@@ -5,6 +5,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Auth } from 'aws-amplify'
 import FormInput from '../FormInput'
 import styled from '@emotion/styled'
 
@@ -78,7 +79,29 @@ const RegistrationForm: FC = () => {
 
   // ? Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
-    console.log(values)
+    console.log({ values })
+    signUp(values.email, values.password, values.email, values.phone)
+  }
+
+  async function signUp(username: string, password: string, email: string, phone_number: string) {
+    try {
+      const { user } = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email, // optional
+          phone_number, // optional - E.164 number convention
+          // other custom attributes
+        },
+        autoSignIn: {
+          // optional - enables auto sign in after user is confirmed
+          enabled: true,
+        },
+      })
+      console.log({ user })
+    } catch (error) {
+      console.log('error signing up:', error)
+    }
   }
 
   // ? JSX to be rendered
