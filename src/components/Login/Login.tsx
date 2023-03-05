@@ -14,8 +14,10 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormInput from '../FormInput'
+import { ReactComponent as GoogleLogo } from '../assets/google.svg'
+import { ReactComponent as GitHubLogo } from '../assets/github.svg'
 import styled from '@emotion/styled'
+import FormInput from '../FormInput'
 
 // ? Styled React Route Dom Link Component
 export const LinkItem = styled(Link)`
@@ -50,14 +52,6 @@ export const OauthMuiLink = styled(MuiLink)`
 // ? Login Schema with Zod
 const loginSchema = object({
   email: string().min(1, 'Email is required').email('Email is invalid'),
-  firstName: string().min(1, 'First name is required'),
-  lastName: string().nonempty({ message: "Last name can't be empty" }),
-  phone: string()
-    .min(1, { message: "Phone number can't be empty" })
-    .regex(/^\d{10}$/, {
-      message: 'Phone number must be 10 digits long',
-    }),
-  major: string().optional(),
   password: string()
     .min(1, 'Password is required')
     .min(8, 'Password must be more than 8 characters')
@@ -68,14 +62,10 @@ const loginSchema = object({
 // ? Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>
 
-const RegistrationForm: FC = () => {
+const LoginPage: FC = () => {
   // ? Default Values
   const defaultValues: ILogin = {
-    firstName: '',
-    lastName: '',
     email: '',
-    phone: '',
-    major: '',
     password: '',
   }
 
@@ -94,10 +84,7 @@ const RegistrationForm: FC = () => {
   return (
     <Container
       maxWidth={false}
-      sx={{
-        height: '100vh',
-        backgroundColor: { xs: '#fff', md: '#f4f4f4' },
-      }}
+      sx={{ height: '100vh', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}
     >
       <Grid
         container
@@ -111,22 +98,21 @@ const RegistrationForm: FC = () => {
               container
               sx={{
                 boxShadow: { sm: '0 0 5px #ddd' },
-                py: '1rem',
+                py: '6rem',
                 px: '1rem',
               }}
             >
               <Grid
                 item
                 container
-                justifyContent="center"
+                justifyContent="space-between"
                 rowSpacing={5}
                 sx={{
                   maxWidth: { sm: '45rem' },
                   marginInline: 'auto',
                 }}
-                mt={1}
               >
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} sx={{ borderRight: { sm: '1px solid #ddd' } }}>
                   <Box
                     display="flex"
                     flexDirection="column"
@@ -141,7 +127,7 @@ const RegistrationForm: FC = () => {
                       component="h1"
                       sx={{ textAlign: 'center', mb: '1.5rem' }}
                     >
-                      Create your account
+                      Log into your account
                     </Typography>
 
                     <FormInput
@@ -151,17 +137,30 @@ const RegistrationForm: FC = () => {
                       focused
                       required
                     />
-                    <FormInput label="First name" type="text" name="firstName" focused required />
-                    <FormInput label="Last name" type="text" name="lastName" focused required />
-                    <FormInput
-                      label="Phone number"
-                      type="number"
-                      inputMode="numeric"
-                      name="phoneNumber"
-                      focused
-                      required
-                    />
                     <FormInput type="password" label="Password" name="password" required focused />
+
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          size="small"
+                          aria-label="trust this device checkbox"
+                          required
+                          {...methods.register('persistUser')}
+                        />
+                      }
+                      label={
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontSize: '0.8rem',
+                            fontWeight: 400,
+                            color: '#5e5b5d',
+                          }}
+                        >
+                          Trust this device
+                        </Typography>
+                      }
+                    />
 
                     <LoadingButton
                       loading={false}
@@ -174,15 +173,45 @@ const RegistrationForm: FC = () => {
                         marginInline: 'auto',
                       }}
                     >
-                      Create
+                      Login
                     </LoadingButton>
                   </Box>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <Typography
+                    variant="h6"
+                    component="p"
+                    sx={{
+                      paddingLeft: { sm: '3rem' },
+                      mb: '1.5rem',
+                      textAlign: 'center',
+                    }}
+                  >
+                    Log in with another provider:
+                  </Typography>
+                  {/* <Box
+                    display="flex"
+                    flexDirection="column"
+                    sx={{ paddingLeft: { sm: '3rem' }, rowGap: '1rem' }}
+                  >
+                    <OauthMuiLink href="">
+                      <GoogleLogo style={{ height: '2rem' }} />
+                      Google
+                    </OauthMuiLink>
+                    <OauthMuiLink href="">
+                      <GitHubLogo style={{ height: '2rem' }} />
+                      GitHub
+                    </OauthMuiLink>
+                  </Box> */}
                 </Grid>
               </Grid>
               <Grid container justifyContent="center">
                 <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
                   <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
-                    Already have an account? <LinkItem to="/login">Login</LinkItem>
+                    Need an account? <LinkItem to="/">Sign up here</LinkItem>
+                  </Typography>
+                  <Typography sx={{ fontSize: '0.9rem' }}>
+                    Forgot your <LinkItem to="/forgotPassword">password?</LinkItem>
                   </Typography>
                 </Stack>
               </Grid>
@@ -194,4 +223,4 @@ const RegistrationForm: FC = () => {
   )
 }
 
-export default RegistrationForm
+export default LoginPage
