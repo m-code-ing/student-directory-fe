@@ -12,7 +12,7 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { literal, object, string, TypeOf } from 'zod'
+import { literal, object, string, number, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormInput from './FormInput'
 // import { ReactComponent as GoogleLogo } from '../assets/google.svg'
@@ -52,6 +52,14 @@ export const OauthMuiLink = styled(MuiLink)`
 // ? Login Schema with Zod
 const loginSchema = object({
   email: string().min(1, 'Email is required').email('Email is invalid'),
+  firstName: string().min(1, 'First name is required'),
+  lastName: string().nonempty({ message: "Last name can't be empty" }),
+  phone: string()
+    .min(1, { message: "Phone number can't be empty" })
+    .regex(/^\d{10}$/, {
+      message: 'Phone number must be 10 digits long',
+    }),
+  major: string().optional(),
   password: string()
     .min(1, 'Password is required')
     .min(8, 'Password must be more than 8 characters')
@@ -65,7 +73,11 @@ type ILogin = TypeOf<typeof loginSchema>
 const LoginPage: FC = () => {
   // ? Default Values
   const defaultValues: ILogin = {
+    firstName: '',
+    lastName: '',
     email: '',
+    phone: '',
+    major: '',
     password: '',
   }
 
@@ -130,12 +142,20 @@ const LoginPage: FC = () => {
                       Create your account
                     </Typography>
 
-                    <FormInput label="First name" type="text" name="first-name" focused required />
                     <FormInput
                       label="Enter your email"
                       type="email"
                       name="email"
                       focused
+                      required
+                    />
+                    <FormInput label="First name" type="text" name="firstName" required />
+                    <FormInput label="Last name" type="text" name="lastName" required />
+                    <FormInput
+                      label="Phone number"
+                      type="number"
+                      inputMode="numeric"
+                      name="phoneNumber"
                       required
                     />
                     <FormInput type="password" label="Password" name="password" required focused />
