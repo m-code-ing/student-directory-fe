@@ -57,7 +57,7 @@ const SearchAppBar = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <TemporaryDrawer open={drawerOpen} onToggleDrawer={setDrawerOpen} />
-      <AppBar position="static">
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             size="large"

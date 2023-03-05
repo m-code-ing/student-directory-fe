@@ -1,13 +1,4 @@
-import {
-  Container,
-  Grid,
-  Box,
-  Typography,
-  Stack,
-  Link as MuiLink,
-  FormControlLabel,
-  Checkbox,
-} from '@mui/material'
+import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
@@ -94,17 +85,13 @@ const RegistrationForm: FC = () => {
   return (
     <Container
       maxWidth={false}
+      disableGutters
       sx={{
         height: '100vh',
         backgroundColor: { xs: '#fff', md: '#f4f4f4' },
       }}
     >
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ width: '100%', height: '100%' }}
-      >
+      <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
         <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
           <FormProvider {...methods}>
             <Grid
@@ -126,14 +113,14 @@ const RegistrationForm: FC = () => {
                 }}
                 mt={1}
               >
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12}>
                   <Box
                     display="flex"
                     flexDirection="column"
+                    alignItems="center"
                     component="form"
                     noValidate
                     autoComplete="off"
-                    sx={{ paddingRight: { sm: '3rem' } }}
                     onSubmit={methods.handleSubmit(onSubmitHandler)}
                   >
                     <Typography
@@ -150,9 +137,24 @@ const RegistrationForm: FC = () => {
                       name="email"
                       focused
                       required
+                      fullWidth
                     />
-                    <FormInput label="First name" type="text" name="firstName" focused required />
-                    <FormInput label="Last name" type="text" name="lastName" focused required />
+                    <FormInput
+                      label="First name"
+                      type="text"
+                      name="firstName"
+                      focused
+                      required
+                      fullWidth
+                    />
+                    <FormInput
+                      label="Last name"
+                      type="text"
+                      name="lastName"
+                      focused
+                      required
+                      fullWidth
+                    />
                     <FormInput
                       label="Phone number"
                       type="number"
@@ -160,8 +162,16 @@ const RegistrationForm: FC = () => {
                       name="phoneNumber"
                       focused
                       required
+                      fullWidth
                     />
-                    <FormInput type="password" label="Password" name="password" required focused />
+                    <FormInput
+                      type="password"
+                      label="Password"
+                      name="password"
+                      required
+                      fullWidth
+                      focused
+                    />
 
                     <LoadingButton
                       loading={false}
