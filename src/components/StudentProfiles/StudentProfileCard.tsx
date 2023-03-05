@@ -1,10 +1,9 @@
 import React from 'react'
-import { Card, CardHeader, CardContent, Avatar, Typography, Grid } from '@mui/material'
+import { Card, CardHeader, CardContent, Avatar, Typography, Grid, useTheme } from '@mui/material'
 
 import CardMedia from '@mui/material/CardMedia'
 import CardActions from '@mui/material/CardActions'
 import IconButton from '@mui/material/IconButton'
-import { red } from '@mui/material/colors'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import ShareIcon from '@mui/icons-material/Share'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
@@ -20,12 +19,13 @@ interface StudentProfileCardProps {
 
 const StudentProfileCard: React.FC<StudentProfileCardProps> = (props): JSX.Element => {
   const { name, email, phoneNumber, major } = props
+  const theme = useTheme()
 
   return (
     <Card>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: theme.palette.primary.light }} aria-label="recipe">
             {name[0]}
           </Avatar>
         }
