@@ -8,6 +8,10 @@ import { BrowserRouter } from 'react-router-dom'
 import StudentProfiles from './components/StudentProfiles/StudentProfiles'
 import LoginPage from './components/Login/Login'
 import Layout from './Layout'
+import { Amplify } from 'aws-amplify'
+import awsconfig from './aws-exports'
+
+Amplify.configure(awsconfig)
 
 const App = (): JSX.Element => {
   return (
