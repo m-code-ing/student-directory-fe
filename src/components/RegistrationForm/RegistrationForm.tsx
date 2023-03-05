@@ -198,33 +198,6 @@ const LoginPage: FC = () => {
                     </LoadingButton>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Typography
-                    variant="h6"
-                    component="p"
-                    sx={{
-                      paddingLeft: { sm: '3rem' },
-                      mb: '1.5rem',
-                      textAlign: 'center',
-                    }}
-                  >
-                    Log in with another provider:
-                  </Typography>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    sx={{ paddingLeft: { sm: '3rem' }, rowGap: '1rem' }}
-                  >
-                    <OauthMuiLink href="">
-                      {/* <GoogleLogo style={{ height: '2rem' }} /> */}
-                      Google
-                    </OauthMuiLink>
-                    <OauthMuiLink href="">
-                      {/* <GitHubLogo style={{ height: '2rem' }} /> */}
-                      GitHub
-                    </OauthMuiLink>
-                  </Box>
-                </Grid>
               </Grid>
               <Grid container justifyContent="center">
                 <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
