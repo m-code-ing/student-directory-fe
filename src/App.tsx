@@ -6,6 +6,8 @@ import styled from '@emotion/styled'
 import { Grid, Paper, ThemeProvider, createTheme } from '@mui/material'
 import type { Theme } from '@mui/material'
 import SearchAppBar from './components/AppBar'
+import LoginPage from './components/RegistrationForm'
+import { BrowserRouter } from 'react-router-dom'
 
 const { name, profilePictureUrl, email, phoneNumber, major, gpa } = userProfileProps
 
@@ -36,27 +38,30 @@ const studens = [1, 2, 3, 4, 5]
 
 const App = (): JSX.Element => {
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <SearchAppBar />
-        <Grid mt={1} container spacing={2} justifyContent="center">
-          {studens.map((key, index) => (
-            <Grid xs={10} md={4} m={1} key={index}>
-              <Item>
-                <StudentProfileCard
-                  name={name}
-                  profilePictureUrl={profilePictureUrl}
-                  email={email}
-                  phoneNumber={phoneNumber}
-                  major={major}
-                  gpa={gpa}
-                />
-              </Item>
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <SearchAppBar />
+          <LoginPage />
+          <Grid mt={1} container spacing={2} justifyContent="center">
+            {studens.map((key, index) => (
+              <Grid xs={10} md={4} m={1} key={index}>
+                <Item>
+                  <StudentProfileCard
+                    name={name}
+                    profilePictureUrl={profilePictureUrl}
+                    email={email}
+                    phoneNumber={phoneNumber}
+                    major={major}
+                    gpa={gpa}
+                  />
+                </Item>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 
