@@ -96,12 +96,15 @@ const LoginPage: FC = () => {
   return (
     <Container
       maxWidth={false}
-      sx={{ height: '100vh', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}
+      sx={{
+        height: '100vh',
+        backgroundColor: { xs: '#fff', md: '#f4f4f4' },
+      }}
     >
       <Grid
         container
         justifyContent="center"
-        alignItems="center"
+        // alignItems="center"
         sx={{ width: '100%', height: '100%' }}
       >
         <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
@@ -110,7 +113,7 @@ const LoginPage: FC = () => {
               container
               sx={{
                 boxShadow: { sm: '0 0 5px #ddd' },
-                py: '6rem',
+                py: '1rem',
                 px: '1rem',
               }}
             >
@@ -123,6 +126,7 @@ const LoginPage: FC = () => {
                   maxWidth: { sm: '45rem' },
                   marginInline: 'auto',
                 }}
+                mt={1}
               >
                 <Grid item xs={12} sm={6} sx={{ borderRight: { sm: '1px solid #ddd' } }}>
                   <Box
