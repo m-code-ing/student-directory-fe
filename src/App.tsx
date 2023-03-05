@@ -2,9 +2,8 @@ import React from 'react'
 import './App.css'
 import StudentProfileCard from './components/StudentProfile'
 import { userProfileProps } from './components/mocks/studentProfileMock'
-import Grid from '@mui/material/Unstable_Grid2'
 import styled from '@emotion/styled'
-import { Paper, ThemeProvider, createTheme } from '@mui/material'
+import { Grid, Paper, ThemeProvider, createTheme } from '@mui/material'
 import type { Theme } from '@mui/material'
 import SearchAppBar from './components/AppBar'
 
@@ -40,7 +39,7 @@ const App = (): JSX.Element => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <SearchAppBar />
-        <Grid container spacing={2} justifyContent="center">
+        <Grid mt={1} container spacing={2} justifyContent="center">
           {studens.map((key, index) => (
             <Grid xs={10} md={4} m={1} key={index}>
               <Item>

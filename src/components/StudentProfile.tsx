@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, CardContent, Avatar, Typography } from '@mui/material'
+import { Card, CardHeader, CardContent, Avatar, Typography, Grid } from '@mui/material'
 
 import CardMedia from '@mui/material/CardMedia'
 import CardActions from '@mui/material/CardActions'
@@ -47,12 +47,18 @@ const StudentProfileCard: React.FC<StudentProfileCardProps> = (props): JSX.Eleme
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        <Grid container justifyContent="flex-end">
+          <Grid item>
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+          </Grid>
+          <Grid item mx={1}>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
       </CardActions>
     </Card>
   )
