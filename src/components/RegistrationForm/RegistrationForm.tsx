@@ -14,7 +14,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormInput from '../components/FormInput'
+import FormInput from './FormInput'
 // import { ReactComponent as GoogleLogo } from '../assets/google.svg'
 // import { ReactComponent as GitHubLogo } from '../assets/github.svg'
 import styled from '@emotion/styled'
@@ -127,9 +127,10 @@ const LoginPage: FC = () => {
                       component="h1"
                       sx={{ textAlign: 'center', mb: '1.5rem' }}
                     >
-                      Log into your account
+                      Create your account
                     </Typography>
 
+                    <FormInput label="First name" type="text" name="first-name" focused required />
                     <FormInput
                       label="Enter your email"
                       type="email"

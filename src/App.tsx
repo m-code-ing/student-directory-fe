@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 import { Grid, Paper, ThemeProvider, createTheme } from '@mui/material'
 import type { Theme } from '@mui/material'
 import SearchAppBar from './components/AppBar'
-import LoginPage from './components/RegistrationForm'
+import LoginPage from './components/RegistrationForm/RegistrationForm'
 import { BrowserRouter } from 'react-router-dom'
 
 const { name, profilePictureUrl, email, phoneNumber, major, gpa } = userProfileProps
