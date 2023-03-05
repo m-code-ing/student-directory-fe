@@ -8,7 +8,10 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
+import LogoutIcon from '@mui/icons-material/Logout'
+import RecentActorsIcon from '@mui/icons-material/RecentActors'
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
+import { useNavigate } from 'react-router-dom'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -18,6 +21,7 @@ type TemporaryDrawerProps = {
 }
 
 export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawerProps) {
+  const navigate = useNavigate()
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === 'keydown' &&
@@ -29,6 +33,20 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
     onToggleDrawer(open)
   }
 
+  const onMenuItemClick = (text: string) => {
+    switch (text) {
+      case 'Sign up':
+        navigate('/')
+        break
+      case 'Students':
+        navigate('/students')
+        break
+
+      default:
+        break
+    }
+  }
+
   const list = (anchor: Anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -37,10 +55,17 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['Sign up', 'Students'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemButton
+              onClick={() => {
+                onMenuItemClick(text)
+              }}
+            >
+              <ListItemIcon>
+                {text === 'Sign up' && <AppRegistrationIcon />}
+                {text === 'Students' && <RecentActorsIcon />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -48,10 +73,13 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Messages', 'Logout'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>
+                {text === 'Messages' && <InboxIcon />}
+                {text === 'Logout' && <LogoutIcon />}
+              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
