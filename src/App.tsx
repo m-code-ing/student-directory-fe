@@ -1,25 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import { ThemeProvider, createTheme } from '@mui/material'
-
+import { ThemeProvider } from '@mui/material'
+import { theme } from './theme'
 import SearchAppBar from './components/AppBar'
 import LoginPage from './components/RegistrationForm/RegistrationForm'
 import { BrowserRouter } from 'react-router-dom'
 import StudentProfiles from './components/StudentProfiles/StudentProfiles'
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#90caf9',
-    },
-    secondary: {
-      main: '#f48fb1',
-    },
-  },
-  typography: {
-    fontFamily: 'Roboto',
-  },
-})
 
 const App = (): JSX.Element => {
   return (
