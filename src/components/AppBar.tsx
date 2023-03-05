@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
+import TemporaryDrawer from './Drawer'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -52,8 +53,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 const SearchAppBar = () => {
+  const [drawerOpen, setDrawerOpen] = React.useState(true)
   return (
     <Box sx={{ flexGrow: 1 }}>
+      <TemporaryDrawer open={drawerOpen} onToggleDrawer={setDrawerOpen} />
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -62,6 +65,9 @@ const SearchAppBar = () => {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            onClick={() => {
+              setDrawerOpen(true)
+            }}
           >
             <MenuIcon />
           </IconButton>

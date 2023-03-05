@@ -40,9 +40,9 @@ const App = (): JSX.Element => {
     <ThemeProvider theme={theme}>
       <div className="App">
         <SearchAppBar />
-        <Grid container spacing={2}>
+        <Grid container spacing={2} justifyContent="center">
           {studens.map((key, index) => (
-            <Grid xs={3} m={3} key={index}>
+            <Grid xs={10} md={4} m={1} key={index}>
               <Item>
                 <StudentProfileCard
                   name={name}
