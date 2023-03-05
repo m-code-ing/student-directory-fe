@@ -12,11 +12,9 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { literal, object, string, number, TypeOf } from 'zod'
+import { literal, object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormInput from './FormInput'
-// import { ReactComponent as GoogleLogo } from '../assets/google.svg'
-// import { ReactComponent as GitHubLogo } from '../assets/github.svg'
 import styled from '@emotion/styled'
 
 // ? Styled React Route Dom Link Component
@@ -104,7 +102,7 @@ const LoginPage: FC = () => {
       <Grid
         container
         justifyContent="center"
-        // alignItems="center"
+        alignItems="center"
         sx={{ width: '100%', height: '100%' }}
       >
         <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
@@ -120,7 +118,7 @@ const LoginPage: FC = () => {
               <Grid
                 item
                 container
-                justifyContent="space-between"
+                justifyContent="center"
                 rowSpacing={5}
                 sx={{
                   maxWidth: { sm: '45rem' },
@@ -128,7 +126,7 @@ const LoginPage: FC = () => {
                 }}
                 mt={1}
               >
-                <Grid item xs={12} sm={6} sx={{ borderRight: { sm: '1px solid #ddd' } }}>
+                <Grid item xs={12} sm={6}>
                   <Box
                     display="flex"
                     flexDirection="column"
