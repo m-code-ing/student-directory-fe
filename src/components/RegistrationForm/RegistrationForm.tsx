@@ -1,6 +1,6 @@
 import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
@@ -80,7 +80,7 @@ const RegistrationForm: FC = () => {
   // ? Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
     console.log({ values })
-    signUp(values.email, values.password, values.email, values.phone)
+    signUp(values.email, values.password, values.email, `+1${values.phone}`)
   }
 
   async function signUp(username: string, password: string, email: string, phone_number: string) {
@@ -182,7 +182,7 @@ const RegistrationForm: FC = () => {
                       label="Phone number"
                       type="number"
                       inputMode="numeric"
-                      name="phoneNumber"
+                      name="phone"
                       focused
                       required
                       fullWidth
