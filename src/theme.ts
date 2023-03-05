@@ -6,6 +6,7 @@ declare module '@mui/material/styles' {
     custom: {
       bg: {
         dark: string
+        light: string
       }
     }
   }
@@ -14,6 +15,7 @@ declare module '@mui/material/styles' {
     custom: {
       bg: {
         dark: string
+        light: string
       }
     }
   }
@@ -29,6 +31,7 @@ export const theme = createTheme({
     },
     custom: {
       bg: {
+        light: deepPurple[50],
         dark: deepPurple[100],
       },
     },

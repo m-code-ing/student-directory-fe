@@ -12,6 +12,7 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import RecentActorsIcon from '@mui/icons-material/RecentActors'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -22,6 +23,8 @@ type TemporaryDrawerProps = {
 
 export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawerProps) {
   const navigate = useNavigate()
+  const theme = useTheme()
+
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (
       event.type === 'keydown' &&
@@ -90,11 +93,16 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
 
   return (
     <div>
-      <React.Fragment>
-        <Drawer anchor="left" open={open} onClose={toggleDrawer(false)}>
+      <Box bgcolor={theme.palette.custom.bg.dark} border={1}>
+        <Drawer
+          anchor="left"
+          open={open}
+          onClose={toggleDrawer(false)}
+          PaperProps={{ sx: { bgcolor: theme.palette.custom.bg.light } }}
+        >
           {list('left')}
         </Drawer>
-      </React.Fragment>
+      </Box>
     </div>
   )
 }
