@@ -34,7 +34,11 @@ const StudentProfileCard: React.FC<StudentProfileCardProps> = (props): JSX.Eleme
             <MoreVertIcon />
           </IconButton>
         }
-        title={name}
+        title={
+          <Typography variant="h5" color="text.secondary">
+            {name}
+          </Typography>
+        }
         subheader={major}
       />
       <CardMedia component="img" height="194" image={props.profilePictureUrl} alt="Paella dish" />
