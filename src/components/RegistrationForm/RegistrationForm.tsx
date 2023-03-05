@@ -14,7 +14,7 @@ import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormInput from './FormInput'
+import FormInput from '../FormInput'
 import styled from '@emotion/styled'
 
 // ? Styled React Route Dom Link Component
@@ -68,7 +68,7 @@ const loginSchema = object({
 // ? Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>
 
-const LoginPage: FC = () => {
+const RegistrationForm: FC = () => {
   // ? Default Values
   const defaultValues: ILogin = {
     firstName: '',
@@ -151,39 +151,17 @@ const LoginPage: FC = () => {
                       focused
                       required
                     />
-                    <FormInput label="First name" type="text" name="firstName" required />
-                    <FormInput label="Last name" type="text" name="lastName" required />
+                    <FormInput label="First name" type="text" name="firstName" focused required />
+                    <FormInput label="Last name" type="text" name="lastName" focused required />
                     <FormInput
                       label="Phone number"
                       type="number"
                       inputMode="numeric"
                       name="phoneNumber"
+                      focused
                       required
                     />
                     <FormInput type="password" label="Password" name="password" required focused />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          size="small"
-                          aria-label="trust this device checkbox"
-                          required
-                          {...methods.register('persistUser')}
-                        />
-                      }
-                      label={
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontSize: '0.8rem',
-                            fontWeight: 400,
-                            color: '#5e5b5d',
-                          }}
-                        >
-                          Trust this device
-                        </Typography>
-                      }
-                    />
 
                     <LoadingButton
                       loading={false}
@@ -196,7 +174,7 @@ const LoginPage: FC = () => {
                         marginInline: 'auto',
                       }}
                     >
-                      Login
+                      Create
                     </LoadingButton>
                   </Box>
                 </Grid>
@@ -204,10 +182,7 @@ const LoginPage: FC = () => {
               <Grid container justifyContent="center">
                 <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
                   <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
-                    Need an account? <LinkItem to="/signup">Sign up here</LinkItem>
-                  </Typography>
-                  <Typography sx={{ fontSize: '0.9rem' }}>
-                    Forgot your <LinkItem to="/forgotPassword">password?</LinkItem>
+                    Already have an account? <LinkItem to="/">Login</LinkItem>
                   </Typography>
                 </Stack>
               </Grid>
@@ -219,4 +194,4 @@ const LoginPage: FC = () => {
   )
 }
 
-export default LoginPage
+export default RegistrationForm
