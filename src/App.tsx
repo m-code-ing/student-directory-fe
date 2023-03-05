@@ -6,6 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import styled from '@emotion/styled'
 import { Paper, ThemeProvider, createTheme } from '@mui/material'
 import type { Theme } from '@mui/material'
+import SearchAppBar from './components/AppBar'
 
 const { name, profilePictureUrl, email, phoneNumber, major, gpa } = userProfileProps
 
@@ -38,6 +39,7 @@ const App = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
+        <SearchAppBar />
         <Grid container spacing={2}>
           {studens.map((key, index) => (
             <Grid xs={3} m={3} key={index}>
