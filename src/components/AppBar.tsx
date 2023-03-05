@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 const SearchAppBar = () => {
-  const [drawerOpen, setDrawerOpen] = React.useState(true)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
   return (
     <Box sx={{ flexGrow: 1 }}>
       <TemporaryDrawer open={drawerOpen} onToggleDrawer={setDrawerOpen} />
