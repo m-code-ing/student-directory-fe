@@ -12,6 +12,8 @@ import { Amplify } from 'aws-amplify'
 
 import awsconfig from './aws-exports'
 import ConfirmSignup from './components/ConfirmSignUp'
+import ForgotPassword from './components/ForgotPassword'
+import ResetPassword from './components/ResetPassword'
 Amplify.configure(awsconfig)
 
 const App = (): JSX.Element => {
@@ -25,6 +27,8 @@ const App = (): JSX.Element => {
               <Route path="/" element={<RegistrationForm />} />
               <Route path="/confirm" element={<ConfirmSignup />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/students" element={<StudentProfiles />} />
             </Routes>
           </Layout>
