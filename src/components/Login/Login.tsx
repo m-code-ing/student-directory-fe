@@ -1,23 +1,13 @@
-import {
-  Container,
-  Grid,
-  Box,
-  Typography,
-  Stack,
-  Link as MuiLink,
-  FormControlLabel,
-  Checkbox,
-} from '@mui/material'
+import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
-import { Link } from 'react-router-dom'
-import { literal, object, string, TypeOf } from 'zod'
+import { Link, useNavigate } from 'react-router-dom'
+import { object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ReactComponent as GoogleLogo } from '../assets/google.svg'
-import { ReactComponent as GitHubLogo } from '../assets/github.svg'
 import styled from '@emotion/styled'
 import FormInput from '../FormInput'
+import { Auth } from 'aws-amplify'
 
 // ? Styled React Route Dom Link Component
 export const LinkItem = styled(Link)`
@@ -52,17 +42,14 @@ export const OauthMuiLink = styled(MuiLink)`
 // ? Login Schema with Zod
 const loginSchema = object({
   email: string().min(1, 'Email is required').email('Email is invalid'),
-  password: string()
-    .min(1, 'Password is required')
-    .min(8, 'Password must be more than 8 characters')
-    .max(32, 'Password must be less than 32 characters'),
-  persistUser: literal(true).optional(),
+  password: string().min(1, 'Password is required'),
 })
 
 // ? Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>
 
 const LoginPage: FC = () => {
+  const navigate = useNavigate()
   // ? Default Values
   const defaultValues: ILogin = {
     email: '',
@@ -77,7 +64,18 @@ const LoginPage: FC = () => {
 
   // ? Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
-    console.log(values)
+    signIn(values.email, values.password)
+  }
+
+  async function signIn(username: string, password: string) {
+    try {
+      console.log({ username, password })
+      const user = await Auth.signIn(username, password)
+      console.log('User successfully signed in:', user)
+      navigate('/students')
+    } catch (error) {
+      console.log('error signing in', error)
+    }
   }
 
   // ? JSX to be rendered
@@ -86,12 +84,7 @@ const LoginPage: FC = () => {
       maxWidth={false}
       sx={{ height: '100vh', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}
     >
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="center"
-        sx={{ width: '100%', height: '100%' }}
-      >
+      <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
         <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
           <FormProvider {...methods}>
             <Grid
@@ -138,29 +131,6 @@ const LoginPage: FC = () => {
                       required
                     />
                     <FormInput type="password" label="Password" name="password" required focused />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          size="small"
-                          aria-label="trust this device checkbox"
-                          required
-                          {...methods.register('persistUser')}
-                        />
-                      }
-                      label={
-                        <Typography
-                          variant="body2"
-                          sx={{
-                            fontSize: '0.8rem',
-                            fontWeight: 400,
-                            color: '#5e5b5d',
-                          }}
-                        >
-                          Trust this device
-                        </Typography>
-                      }
-                    />
 
                     <LoadingButton
                       loading={false}

@@ -13,6 +13,7 @@ import RecentActorsIcon from '@mui/icons-material/RecentActors'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
+import { Auth } from 'aws-amplify'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
@@ -36,6 +37,15 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
     onToggleDrawer(open)
   }
 
+  const signOut = async () => {
+    try {
+      await Auth.signOut()
+      navigate('/login')
+    } catch (error) {
+      console.log('error signing out: ', error)
+    }
+  }
+
   const onMenuItemClick = (text: string) => {
     switch (text) {
       case 'Sign up':
@@ -43,6 +53,9 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
         break
       case 'Students':
         navigate('/students')
+        break
+      case 'Logout':
+        signOut()
         break
 
       default:
