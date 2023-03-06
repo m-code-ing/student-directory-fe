@@ -1,12 +1,12 @@
 import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import { literal, object, string, TypeOf } from 'zod'
+import { object, string, TypeOf } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Auth } from 'aws-amplify'
-import FormInput from '../FormInput'
+import FormInput from './FormInput'
 import styled from '@emotion/styled'
 
 // ? Styled React Route Dom Link Component
@@ -42,38 +42,17 @@ export const OauthMuiLink = styled(MuiLink)`
 // ? Login Schema with Zod
 const loginSchema = object({
   email: string().min(1, 'Email is required').email('Email is invalid'),
-  firstName: string().min(1, 'First name is required'),
-  lastName: string().nonempty({ message: "Last name can't be empty" }),
-  phone: string()
-    .min(1, { message: "Phone number can't be empty" })
-    .max(10, { message: 'Phone number cannot be longer than 10 character' })
-    .regex(/^\d{10}$/, {
-      message: 'Phone number must be 10 digits long',
-    }),
-  major: string().optional(),
-  password: string()
-    .min(1, 'Password is required')
-    .min(8, 'Password must be more than 8 characters')
-    .max(32, 'Password must be less than 32 characters')
-    .regex(
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/gm,
-      'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character (!@#$%^&*)',
-    ),
-  persistUser: literal(true).optional(),
+  code: string().min(1, { message: "Verification code can't be empty" }),
 })
 
 // ? Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>
 
-const RegistrationForm: FC = () => {
+const ConfirmSignup: FC = () => {
   // ? Default Values
   const defaultValues: ILogin = {
-    firstName: '',
-    lastName: '',
     email: '',
-    phone: '',
-    major: '',
-    password: '',
+    code: '',
   }
 
   // ? The object returned from useForm Hook
@@ -85,32 +64,16 @@ const RegistrationForm: FC = () => {
   const navigate = useNavigate()
 
   // ? Submit Handler
-  const onSubmitHandler: SubmitHandler<ILogin> = async (values: ILogin) => {
-    const userSub = await signUp(values.email, values.password, values.email, `+1${values.phone}`)
-    if (userSub) {
-      navigate('/confirm')
-    }
+  const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
+    confirmSignUp(values.email, values.code)
   }
 
-  async function signUp(username: string, password: string, email: string, phone_number: string) {
+  async function confirmSignUp(username: string, code: string) {
     try {
-      const { userSub } = await Auth.signUp({
-        username,
-        password,
-        attributes: {
-          email, // optional
-          phone_number, // optional - E.164 number convention
-          // other custom attributes
-        },
-        autoSignIn: {
-          // optional - enables auto sign in after user is confirmed
-          enabled: true,
-        },
-      })
-      console.log({ userSub })
-      return userSub
+      await Auth.confirmSignUp(username, code)
+      navigate('/login')
     } catch (error) {
-      console.log('error signing up:', error)
+      console.log('error confirming sign up', error)
     }
   }
 
@@ -161,7 +124,7 @@ const RegistrationForm: FC = () => {
                       component="h1"
                       sx={{ textAlign: 'center', mb: '1.5rem' }}
                     >
-                      Create your account
+                      Confirm Verification Code
                     </Typography>
 
                     <FormInput
@@ -173,37 +136,12 @@ const RegistrationForm: FC = () => {
                       fullWidth
                     />
                     <FormInput
-                      label="First name"
+                      label="Verification code"
                       type="text"
-                      name="firstName"
+                      name="code"
                       focused
                       required
                       fullWidth
-                    />
-                    <FormInput
-                      label="Last name"
-                      type="text"
-                      name="lastName"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      label="Phone number"
-                      type="number"
-                      inputMode="numeric"
-                      name="phone"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      type="password"
-                      label="Password"
-                      name="password"
-                      required
-                      fullWidth
-                      focused
                     />
 
                     <LoadingButton
@@ -217,7 +155,7 @@ const RegistrationForm: FC = () => {
                         marginInline: 'auto',
                       }}
                     >
-                      Create
+                      Confirm
                     </LoadingButton>
                   </Box>
                 </Grid>
@@ -237,4 +175,4 @@ const RegistrationForm: FC = () => {
   )
 }
 
-export default RegistrationForm
+export default ConfirmSignup

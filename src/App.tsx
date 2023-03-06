@@ -9,8 +9,9 @@ import StudentProfiles from './components/StudentProfiles/StudentProfiles'
 import LoginPage from './components/Login/Login'
 import Layout from './Layout'
 import { Amplify } from 'aws-amplify'
-import awsconfig from './aws-exports'
 
+import awsconfig from './aws-exports'
+import ConfirmSignup from './components/ConfirmSignUp'
 Amplify.configure(awsconfig)
 
 const App = (): JSX.Element => {
@@ -22,6 +23,7 @@ const App = (): JSX.Element => {
             <SearchAppBar />
             <Routes>
               <Route path="/" element={<RegistrationForm />} />
+              <Route path="/confirm" element={<ConfirmSignup />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/students" element={<StudentProfiles />} />
             </Routes>
