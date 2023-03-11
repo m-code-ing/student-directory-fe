@@ -21,9 +21,9 @@ const PrivateRoute = ({ children }: { children: JSX.Element }): JSX.Element => {
   if (isAuthenticating) {
     return <div>Loading...</div>
   }
-  alert('you are not logged in')
 
   if (!isAuthenticated) {
+    alert('you are not logged in')
     return <Navigate to="/login" replace />
   }
 

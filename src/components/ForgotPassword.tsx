@@ -1,4 +1,4 @@
-import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
+import { Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
@@ -74,91 +74,82 @@ const ForgotPassword: FC = () => {
 
   // ? JSX to be rendered
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{
-        height: '100vh',
-        backgroundColor: { xs: '#fff', md: '#f4f4f4' },
-      }}
-    >
-      <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
-        <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
-          <FormProvider {...methods}>
+    <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
+      <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
+        <FormProvider {...methods}>
+          <Grid
+            container
+            sx={{
+              boxShadow: { sm: '0 0 5px #ddd' },
+              py: '1rem',
+              px: '1rem',
+            }}
+          >
             <Grid
+              item
               container
+              justifyContent="center"
+              rowSpacing={5}
               sx={{
-                boxShadow: { sm: '0 0 5px #ddd' },
-                py: '1rem',
-                px: '1rem',
+                maxWidth: { sm: '45rem' },
+                marginInline: 'auto',
               }}
+              mt={1}
             >
-              <Grid
-                item
-                container
-                justifyContent="center"
-                rowSpacing={5}
-                sx={{
-                  maxWidth: { sm: '45rem' },
-                  marginInline: 'auto',
-                }}
-                mt={1}
-              >
-                <Grid item xs={12} sm={12}>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    component="form"
-                    noValidate
-                    autoComplete="off"
-                    onSubmit={methods.handleSubmit(onSubmitHandler)}
+              <Grid item xs={12} sm={12}>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  component="form"
+                  noValidate
+                  autoComplete="off"
+                  onSubmit={methods.handleSubmit(onSubmitHandler)}
+                >
+                  <Typography
+                    variant="h6"
+                    component="h1"
+                    sx={{ textAlign: 'center', mb: '1.5rem' }}
                   >
-                    <Typography
-                      variant="h6"
-                      component="h1"
-                      sx={{ textAlign: 'center', mb: '1.5rem' }}
-                    >
-                      Forgot Password
-                    </Typography>
-
-                    <FormInput
-                      label="Enter your email"
-                      type="email"
-                      name="email"
-                      focused
-                      required
-                      fullWidth
-                    />
-
-                    <LoadingButton
-                      loading={false}
-                      type="submit"
-                      variant="contained"
-                      sx={{
-                        py: '0.8rem',
-                        mt: 2,
-                        width: '80%',
-                        marginInline: 'auto',
-                      }}
-                    >
-                      Send Confirmation Code
-                    </LoadingButton>
-                  </Box>
-                </Grid>
-              </Grid>
-              <Grid container justifyContent="center">
-                <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
-                  <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
-                    Already have an account? <LinkItem to="/login">Login</LinkItem>
+                    Forgot Password
                   </Typography>
-                </Stack>
+
+                  <FormInput
+                    label="Enter your email"
+                    type="email"
+                    name="email"
+                    focused
+                    required
+                    fullWidth
+                  />
+
+                  <LoadingButton
+                    loading={false}
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      py: '0.8rem',
+                      mt: 2,
+                      width: '80%',
+                      marginInline: 'auto',
+                    }}
+                  >
+                    Send Confirmation Code
+                  </LoadingButton>
+                </Box>
               </Grid>
             </Grid>
-          </FormProvider>
-        </Grid>
+            <Grid container justifyContent="center">
+              <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
+                <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
+                  Already have an account? <LinkItem to="/login">Login</LinkItem>
+                </Typography>
+              </Stack>
+            </Grid>
+          </Grid>
+        </FormProvider>
       </Grid>
-    </Container>
+    </Grid>
   )
 }
 

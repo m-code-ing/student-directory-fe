@@ -1,11 +1,17 @@
-import { Box } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React, { PropsWithChildren } from 'react'
 
 const Layout = ({ children }: PropsWithChildren) => {
   return (
-    <Box display="flex" justifyContent="center">
-      <Box maxWidth={400}>{children}</Box>
-    </Box>
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{ height: '100vh', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}
+    >
+      <Box display="flex" justifyContent="center">
+        <Box width={400}>{children}</Box>
+      </Box>
+    </Container>
   )
 }
 

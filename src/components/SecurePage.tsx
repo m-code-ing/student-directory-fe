@@ -1,6 +1,5 @@
 import { Box, Button } from '@mui/material'
 import { Auth } from 'aws-amplify'
-import React from 'react'
 
 const SecurePage = () => {
   const onClick = async () => {

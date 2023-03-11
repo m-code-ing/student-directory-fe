@@ -1,6 +1,6 @@
-import { Container, Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
+import { Grid, Box, Typography, Stack, Link as MuiLink } from '@mui/material'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { literal, object, string, TypeOf } from 'zod'
@@ -116,124 +116,115 @@ const RegistrationForm: FC = () => {
 
   // ? JSX to be rendered
   return (
-    <Container
-      maxWidth={false}
-      disableGutters
-      sx={{
-        height: '100vh',
-        backgroundColor: { xs: '#fff', md: '#f4f4f4' },
-      }}
-    >
-      <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
-        <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
-          <FormProvider {...methods}>
+    <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
+      <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
+        <FormProvider {...methods}>
+          <Grid
+            container
+            sx={{
+              boxShadow: { sm: '0 0 5px #ddd' },
+              py: '1rem',
+              px: '1rem',
+            }}
+          >
             <Grid
+              item
               container
+              justifyContent="center"
+              rowSpacing={5}
               sx={{
-                boxShadow: { sm: '0 0 5px #ddd' },
-                py: '1rem',
-                px: '1rem',
+                maxWidth: { sm: '45rem' },
+                marginInline: 'auto',
               }}
+              mt={1}
             >
-              <Grid
-                item
-                container
-                justifyContent="center"
-                rowSpacing={5}
-                sx={{
-                  maxWidth: { sm: '45rem' },
-                  marginInline: 'auto',
-                }}
-                mt={1}
-              >
-                <Grid item xs={12} sm={12}>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    component="form"
-                    noValidate
-                    autoComplete="off"
-                    onSubmit={methods.handleSubmit(onSubmitHandler)}
+              <Grid item xs={12} sm={12}>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  component="form"
+                  noValidate
+                  autoComplete="off"
+                  onSubmit={methods.handleSubmit(onSubmitHandler)}
+                >
+                  <Typography
+                    variant="h6"
+                    component="h1"
+                    sx={{ textAlign: 'center', mb: '1.5rem' }}
                   >
-                    <Typography
-                      variant="h6"
-                      component="h1"
-                      sx={{ textAlign: 'center', mb: '1.5rem' }}
-                    >
-                      Create your account
-                    </Typography>
-
-                    <FormInput
-                      label="Enter your email"
-                      type="email"
-                      name="email"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      label="First name"
-                      type="text"
-                      name="firstName"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      label="Last name"
-                      type="text"
-                      name="lastName"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      label="Phone number"
-                      type="number"
-                      inputMode="numeric"
-                      name="phone"
-                      focused
-                      required
-                      fullWidth
-                    />
-                    <FormInput
-                      type="password"
-                      label="Password"
-                      name="password"
-                      required
-                      fullWidth
-                      focused
-                    />
-
-                    <LoadingButton
-                      loading={false}
-                      type="submit"
-                      variant="contained"
-                      sx={{
-                        py: '0.8rem',
-                        mt: 2,
-                        width: '80%',
-                        marginInline: 'auto',
-                      }}
-                    >
-                      Create
-                    </LoadingButton>
-                  </Box>
-                </Grid>
-              </Grid>
-              <Grid container justifyContent="center">
-                <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
-                  <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
-                    Already have an account? <LinkItem to="/login">Login</LinkItem>
+                    Create your account
                   </Typography>
-                </Stack>
+
+                  <FormInput
+                    label="Enter your email"
+                    type="email"
+                    name="email"
+                    focused
+                    required
+                    fullWidth
+                  />
+                  <FormInput
+                    label="First name"
+                    type="text"
+                    name="firstName"
+                    focused
+                    required
+                    fullWidth
+                  />
+                  <FormInput
+                    label="Last name"
+                    type="text"
+                    name="lastName"
+                    focused
+                    required
+                    fullWidth
+                  />
+                  <FormInput
+                    label="Phone number"
+                    type="number"
+                    inputMode="numeric"
+                    name="phone"
+                    focused
+                    required
+                    fullWidth
+                  />
+                  <FormInput
+                    type="password"
+                    label="Password"
+                    name="password"
+                    required
+                    fullWidth
+                    focused
+                  />
+
+                  <LoadingButton
+                    loading={false}
+                    type="submit"
+                    variant="contained"
+                    sx={{
+                      py: '0.8rem',
+                      mt: 2,
+                      width: '80%',
+                      marginInline: 'auto',
+                    }}
+                  >
+                    Create
+                  </LoadingButton>
+                </Box>
               </Grid>
             </Grid>
-          </FormProvider>
-        </Grid>
+            <Grid container justifyContent="center">
+              <Stack sx={{ mt: '3rem', textAlign: 'center' }}>
+                <Typography sx={{ fontSize: '0.9rem', mb: '1rem' }}>
+                  Already have an account? <LinkItem to="/login">Login</LinkItem>
+                </Typography>
+              </Stack>
+            </Grid>
+          </Grid>
+        </FormProvider>
       </Grid>
-    </Container>
+    </Grid>
   )
 }
 
