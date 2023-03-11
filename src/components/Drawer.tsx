@@ -14,12 +14,21 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
 import { Auth } from 'aws-amplify'
+import { ROUTES } from '../App'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
 type TemporaryDrawerProps = {
   open: boolean
   onToggleDrawer: (open: boolean) => void
+}
+
+const NAV_LINKS = {
+  signUp: 'Sign up',
+  students: 'Students',
+  messages: 'Messages',
+  securePage: 'Secure Page',
+  logout: 'Log out',
 }
 
 export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawerProps) {
@@ -48,17 +57,21 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
 
   const onMenuItemClick = (text: string) => {
     switch (text) {
-      case 'Sign up':
+      case NAV_LINKS.signUp:
         navigate('/')
         break
-      case 'Students':
+      case NAV_LINKS.students:
         navigate('/students')
         break
-      case 'Logout':
+      case NAV_LINKS.securePage:
+        navigate(ROUTES.securePage)
+        break
+      case NAV_LINKS.logout:
         signOut()
         break
 
       default:
+        console.log({ text })
         break
     }
   }
@@ -89,10 +102,15 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
       </List>
       <Divider />
       <List>
-        {['Messages', 'Logout'].map((text, index) => (
+        {['Messages', 'Secure Page', 'Logout'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton
+              onClick={() => {
+                onMenuItemClick(text)
+              }}
+            >
               <ListItemIcon>
+                {text === 'Secure Page' && <InboxIcon />}
                 {text === 'Messages' && <InboxIcon />}
                 {text === 'Logout' && <LogoutIcon />}
               </ListItemIcon>

@@ -14,7 +14,19 @@ import awsconfig from './aws-exports'
 import ConfirmSignup from './components/ConfirmSignUp'
 import ForgotPassword from './components/ForgotPassword'
 import ResetPassword from './components/ResetPassword'
+import SecurePage from './components/SecurePage'
+
 Amplify.configure(awsconfig)
+
+export const ROUTES = {
+  signUp: '/',
+  confirm: '/confirm',
+  login: '/login',
+  forgotPassword: '/forgotPassword',
+  resetPassword: '/reset-password',
+  securePage: 'secure-page',
+  students: '/students',
+}
 
 const App = (): JSX.Element => {
   return (
@@ -24,12 +36,13 @@ const App = (): JSX.Element => {
           <Layout>
             <SearchAppBar />
             <Routes>
-              <Route path="/" element={<RegistrationForm />} />
-              <Route path="/confirm" element={<ConfirmSignup />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/forgotPassword" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/students" element={<StudentProfiles />} />
+              <Route path={ROUTES.signUp} element={<RegistrationForm />} />
+              <Route path={ROUTES.confirm} element={<ConfirmSignup />} />
+              <Route path={ROUTES.login} element={<LoginPage />} />
+              <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
+              <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
+              <Route path={ROUTES.securePage} element={<SecurePage />} />
+              <Route path={ROUTES.students} element={<StudentProfiles />} />
             </Routes>
           </Layout>
         </div>
