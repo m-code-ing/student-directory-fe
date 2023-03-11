@@ -80,13 +80,12 @@ const LoginPage: FC = () => {
 
   // ? JSX to be rendered
   return (
-    <Grid container justifyContent="center" sx={{ width: '100%', height: '100%' }}>
-      <Grid item sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}>
+    <Grid container justifyContent="center">
+      <Grid item>
         <FormProvider {...methods}>
           <Grid
             container
             sx={{
-              boxShadow: { sm: '0 0 5px #ddd' },
               py: '6rem',
               px: '1rem',
             }}

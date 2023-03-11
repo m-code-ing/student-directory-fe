@@ -80,7 +80,6 @@ const ForgotPassword: FC = () => {
           <Grid
             container
             sx={{
-              boxShadow: { sm: '0 0 5px #ddd' },
               py: '1rem',
               px: '1rem',
             }}

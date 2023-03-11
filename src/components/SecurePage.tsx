@@ -9,7 +9,7 @@ const SecurePage = () => {
   }
 
   return (
-    <Box border={1}>
+    <Box>
       <Button variant="outlined" onClick={onClick}>
         API Call
       </Button>

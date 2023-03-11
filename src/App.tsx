@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { Amplify } from 'aws-amplify'
 import awsconfig from './aws-exports'
 
-import SearchAppBar from './components/AppBar'
 import Layout from './Layout'
 import AppRoutes from './routing/AppRoutes'
 
@@ -27,7 +26,6 @@ const App = (): JSX.Element => {
       <ThemeProvider theme={theme}>
         <div className="App">
           <Layout>
-            <SearchAppBar />
             <AppRoutes />
           </Layout>
         </div>

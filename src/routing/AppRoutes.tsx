@@ -5,7 +5,6 @@ import LoginPage from '../components/Login/Login'
 import ConfirmSignup from '../components/ConfirmSignUp'
 import ForgotPassword from '../components/ForgotPassword'
 import ResetPassword from '../components/ResetPassword'
-import SecurePage from '../components/SecurePage'
 import PrivateRoute from '../PrivateRoute'
 
 export const ROUTES = {
@@ -27,14 +26,13 @@ const AppRoutes = (): JSX.Element => {
       <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
       <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
       <Route
-        path={ROUTES.securePage}
+        path={ROUTES.students}
         element={
           <PrivateRoute>
-            <SecurePage />
+            <StudentProfiles />
           </PrivateRoute>
         }
       />
-      <Route path={ROUTES.students} element={<StudentProfiles />} />
     </Routes>
   )
 }
