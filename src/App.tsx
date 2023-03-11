@@ -10,16 +10,6 @@ import AppRoutes from './routing/AppRoutes'
 
 Amplify.configure(awsconfig)
 
-export const ROUTES = {
-  signUp: '/',
-  confirm: '/confirm',
-  login: '/login',
-  forgotPassword: '/forgotPassword',
-  resetPassword: '/reset-password',
-  securePage: 'secure-page',
-  students: '/students',
-}
-
 const App = (): JSX.Element => {
   return (
     <BrowserRouter>

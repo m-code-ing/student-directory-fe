@@ -6,6 +6,8 @@ import ConfirmSignup from '../components/ConfirmSignUp'
 import ForgotPassword from '../components/ForgotPassword'
 import ResetPassword from '../components/ResetPassword'
 import PrivateRoute from '../PrivateRoute'
+import Messages from '../components/Messages'
+import SecurePage from '../components/SecurePage'
 
 export const ROUTES = {
   signUp: '/',
@@ -15,7 +17,10 @@ export const ROUTES = {
   resetPassword: '/reset-password',
   securePage: 'secure-page',
   students: '/students',
-}
+  messages: '/messages',
+} as const
+
+export type RouteValues = (typeof ROUTES)[keyof typeof ROUTES]
 
 const AppRoutes = (): JSX.Element => {
   return (
@@ -30,6 +35,22 @@ const AppRoutes = (): JSX.Element => {
         element={
           <PrivateRoute>
             <StudentProfiles />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={ROUTES.messages}
+        element={
+          <PrivateRoute>
+            <Messages />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={ROUTES.securePage}
+        element={
+          <PrivateRoute>
+            <SecurePage />
           </PrivateRoute>
         }
       />

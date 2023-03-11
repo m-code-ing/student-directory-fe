@@ -13,7 +13,7 @@ import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
 import { Auth } from 'aws-amplify'
-import { ROUTES } from '../App'
+import { ROUTES } from '../routing/AppRoutes'
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right'
 
