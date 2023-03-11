@@ -105,14 +105,13 @@ const LoginPage: FC = () => {
                   marginInline: 'auto',
                 }}
               >
-                <Grid item xs={12} sm={6} sx={{ borderRight: { sm: '1px solid #ddd' } }}>
+                <Grid item xs={12}>
                   <Box
                     display="flex"
                     flexDirection="column"
                     component="form"
                     noValidate
                     autoComplete="off"
-                    sx={{ paddingRight: { sm: '3rem' } }}
                     onSubmit={methods.handleSubmit(onSubmitHandler)}
                   >
                     <Typography
@@ -147,12 +146,11 @@ const LoginPage: FC = () => {
                     </LoadingButton>
                   </Box>
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12}>
                   <Typography
                     variant="h6"
                     component="p"
                     sx={{
-                      paddingLeft: { sm: '3rem' },
                       mb: '1.5rem',
                       textAlign: 'center',
                     }}
