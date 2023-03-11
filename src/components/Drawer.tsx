@@ -28,7 +28,7 @@ const NAV_LINKS = {
   students: 'Students',
   messages: 'Messages',
   securePage: 'Secure Page',
-  logout: 'Log out',
+  logout: 'Logout',
 }
 
 export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawerProps) {
