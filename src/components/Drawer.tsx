@@ -2,14 +2,13 @@ import * as React from 'react'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
 import LogoutIcon from '@mui/icons-material/Logout'
-import RecentActorsIcon from '@mui/icons-material/RecentActors'
+import LoginIcon from '@mui/icons-material/Login'
+import LockPersonIcon from '@mui/icons-material/LockPerson'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration'
 import { useNavigate } from 'react-router-dom'
 import { useTheme } from '@mui/material'
@@ -24,12 +23,15 @@ type TemporaryDrawerProps = {
 }
 
 const NAV_LINKS = {
+  login: 'Login',
   signUp: 'Sign up',
-  students: 'Students',
-  messages: 'Messages',
-  securePage: 'Secure Page',
   logout: 'Logout',
-}
+  securePage: 'Secure Page',
+} as const
+
+const linkTexts = Object.values(NAV_LINKS)
+
+type NavLinksValue = (typeof NAV_LINKS)[keyof typeof NAV_LINKS]
 
 export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawerProps) {
   const navigate = useNavigate()
@@ -58,16 +60,16 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
   const onMenuItemClick = (text: string) => {
     switch (text) {
       case NAV_LINKS.signUp:
-        navigate('/')
+        navigate(ROUTES.signUp)
         break
-      case NAV_LINKS.students:
-        navigate('/students')
-        break
-      case NAV_LINKS.securePage:
-        navigate(ROUTES.securePage)
+      case NAV_LINKS.login:
+        navigate(ROUTES.login)
         break
       case NAV_LINKS.logout:
         signOut()
+        break
+      case NAV_LINKS.securePage:
+        navigate(ROUTES.securePage)
         break
 
       default:
@@ -84,7 +86,7 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        {['Sign up', 'Students'].map((text, index) => (
+        {linkTexts.map((text: NavLinksValue, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton
               onClick={() => {
@@ -92,27 +94,10 @@ export default function TemporaryDrawer({ open, onToggleDrawer }: TemporaryDrawe
               }}
             >
               <ListItemIcon>
-                {text === 'Sign up' && <AppRegistrationIcon />}
-                {text === 'Students' && <RecentActorsIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['Messages', 'Secure Page', 'Logout'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              onClick={() => {
-                onMenuItemClick(text)
-              }}
-            >
-              <ListItemIcon>
-                {text === 'Secure Page' && <InboxIcon />}
-                {text === 'Messages' && <InboxIcon />}
-                {text === 'Logout' && <LogoutIcon />}
+                {text === NAV_LINKS.login && <LoginIcon />}
+                {text === NAV_LINKS.signUp && <AppRegistrationIcon />}
+                {text === NAV_LINKS.logout && <LogoutIcon />}
+                {text === NAV_LINKS.securePage && <LockPersonIcon />}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>

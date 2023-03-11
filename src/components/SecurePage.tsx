@@ -1,20 +1,7 @@
-import { Box, Button } from '@mui/material'
-import { Auth } from 'aws-amplify'
+import { Box } from '@mui/material'
 
 const SecurePage = () => {
-  const onClick = async () => {
-    const result = await Auth.currentAuthenticatedUser()
-
-    console.log({ result })
-  }
-
-  return (
-    <Box>
-      <Button variant="outlined" onClick={onClick}>
-        API Call
-      </Button>
-    </Box>
-  )
+  return <Box>This is a secure page</Box>
 }
 
 export default SecurePage
