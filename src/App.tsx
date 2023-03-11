@@ -15,6 +15,7 @@ import ConfirmSignup from './components/ConfirmSignUp'
 import ForgotPassword from './components/ForgotPassword'
 import ResetPassword from './components/ResetPassword'
 import SecurePage from './components/SecurePage'
+import PrivateRoute from './PrivateRoute'
 
 Amplify.configure(awsconfig)
 
@@ -41,7 +42,14 @@ const App = (): JSX.Element => {
               <Route path={ROUTES.login} element={<LoginPage />} />
               <Route path={ROUTES.forgotPassword} element={<ForgotPassword />} />
               <Route path={ROUTES.resetPassword} element={<ResetPassword />} />
-              <Route path={ROUTES.securePage} element={<SecurePage />} />
+              <Route
+                path={ROUTES.securePage}
+                element={
+                  <PrivateRoute>
+                    <SecurePage />
+                  </PrivateRoute>
+                }
+              />
               <Route path={ROUTES.students} element={<StudentProfiles />} />
             </Routes>
           </Layout>
